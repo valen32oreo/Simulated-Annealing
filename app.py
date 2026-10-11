@@ -49,14 +49,6 @@ st.markdown(
         margin: 0;
     }
 
-    .header-subtitle {
-        font-size: 15px;
-        font-weight: 400;
-        line-height: 1.5;
-        color: #475569;
-        margin: 6px 0 0 0;
-    }
-
     /* Metric Cards */
     .metric-card {
         background: #ffffff;
@@ -197,7 +189,6 @@ def main():
         <div class="header-container">
             <p class="header-eyebrow">Kelompok 1 · Kompleksitas Algoritma</p>
             <h1 class="header-title">Pengaturan Lampu Lalu Lintas Adaptif dengan Menggunakan Algoritma <i>Simulated Annealing</i></h1>
-            <p class="header-subtitle">Menggunakan Algoritma Simulated Annealing (SA)</p>
         </div>
     """,
         unsafe_allow_html=True,
