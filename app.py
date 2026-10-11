@@ -551,10 +551,10 @@ def main():
 
             # UPDATE ALOKASI HIJAU REALTIME (Gunakan best_state)
             phases = [
-                ("⬆️ Arah Utara", demands[0], best_state[0]),
-                ("⬇️ Arah Selatan", demands[1], best_state[1]),
-                ("➡️ Arah Timur", demands[2], best_state[2]),
-                ("⬅️ Arah Barat", demands[3], best_state[3]),
+                ("⬆️ Lajur Utara", demands[0], best_state[0]),
+                ("⬇️ Lajur Selatan", demands[1], best_state[1]),
+                ("➡️ Lajur Timur", demands[2], best_state[2]),
+                ("⬅️ Lajur Barat", demands[3], best_state[3]),
             ]
             with p_alloc.container():
                 for label, dem, val in phases:
