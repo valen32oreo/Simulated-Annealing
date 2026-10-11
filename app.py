@@ -12,7 +12,6 @@ st.set_page_config(
     initial_sidebar_state="expanded",
 )
 
-# --- STYLING CUSTOM CSS (UI/UX MODERN & PROFESSIONAL) ---
 st.markdown(
     """
     <style>
@@ -191,7 +190,8 @@ def calculate_delay(state, demands):
 
 # --- MAIN APP ---
 def main():
-    # HEADER BANNER MODERN
+
+    # HEADER BANNER
     st.markdown(
         """
         <div class="header-container">
@@ -216,7 +216,6 @@ def main():
         ],
     )
 
-    # Pemilihan Demands (100% Persis Kode Lama)
     if scenario == "Utara Sangat Padat (Jam Sibuk)":
         demands = [50, 15, 30, 10]
     elif scenario == "Lalu Lintas Merata":
