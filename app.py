@@ -309,7 +309,7 @@ def main():
         - **Eksplorasi**: Menerima solusi buruk dengan probabilitas $P = e^{-\Delta E / T}$ saat suhu ($T$) tinggi.
         """)
 
-    # BASELINE COMPUTATION (100% Persis Kode Lama)
+    # BASELINE COMPUTATION
     fixed_state = [25, 25, 25, 25]
     baseline_delay = calculate_delay(fixed_state, demands)
 
@@ -441,7 +441,6 @@ def main():
         type="primary",
         use_container_width=True,
     ):
-        # 100% PERSIS KODE SA LAMA
         current_state = list(fixed_state)
         current_delay = baseline_delay
         best_state = list(current_state)
@@ -456,7 +455,7 @@ def main():
         while T > T_min:
             step += 1
 
-            # Logika Neighbor Generation (100% Persis Kode Lama)
+            # Logika Neighbor Generation
             neighbor = list(current_state)
             i, j = random.sample(range(4), 2)
             delta = random.choice([2, 3, 4, 5])
@@ -468,7 +467,7 @@ def main():
             neighbor_delay = calculate_delay(neighbor, demands)
             diff = neighbor_delay - current_delay
 
-            # Logika Metropolis Criterion (100% Persis Kode Lama)
+            # Logika Metropolis Criterion
             if diff < 0 or random.random() < math.exp(-diff / T):
                 current_state = neighbor
                 current_delay = neighbor_delay
