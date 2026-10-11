@@ -283,6 +283,7 @@ def main():
             "Utara Sangat Padat (Jam Sibuk)",
             "Lalu Lintas Merata",
             "Simpang Tidak Seimbang",
+            "Input Manual (Custom)",
         ],
     )
 
@@ -290,8 +291,15 @@ def main():
         demands = [50, 15, 30, 10]
     elif scenario == "Lalu Lintas Merata":
         demands = [35, 35, 35, 35]
-    else:
+    elif scenario == "Simpang Tidak Seimbang":
         demands = [60, 10, 45, 15]
+    else:
+        st.sidebar.markdown("**Atur Kendaraan/Menit:**")
+        u = st.sidebar.slider("Utara", 5, 100, 40)
+        s = st.sidebar.slider("Selatan", 5, 100, 20)
+        t = st.sidebar.slider("Timur", 5, 100, 30)
+        b = st.sidebar.slider("Barat", 5, 100, 15)
+        demands = [u, s, t, b]
 
     st.sidebar.markdown("---")
     st.sidebar.subheader("🔥 Parameter Simulated Annealing")
