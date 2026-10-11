@@ -22,31 +22,98 @@ st.markdown(
     }
 
     /* Header Banner */
-    .header-container {
+    .header-card {
         background: #ffffff;
-        padding: 28px 32px;
         border: 1px solid #e2e8f0;
-        border-left: 4px solid #1e40af;
-        border-radius: 8px;
+        border-radius: 12px;
+        padding: clamp(20px, 3.5vw, 32px);
+        box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.05);
+        display: flex;
+        gap: clamp(16px, 2.5vw, 24px);
+        align-items: stretch;
         margin-bottom: 24px;
     }
 
-    .header-eyebrow {
-        font-size: 12px;
-        font-weight: 600;
-        letter-spacing: 0.08em;
-        text-transform: uppercase;
-        color: #64748b;
-        margin: 0 0 8px 0;
+    /* Left Accent Bar Warna Biru */
+    .accent-bar {
+        width: 4px;
+        background-color: #1d4ed8;
+        border-radius: 9999px;
+        flex-shrink: 0;
     }
 
-    .header-title {
-        font-size: 26px;
-        font-weight: 700;
-        line-height: 1.3;
-        letter-spacing: -0.01em;
-        color: #0f172a;
+    /* Wrapper Konten Teks */
+    .header-content {
+        display: flex;
+        flex-direction: column;
+        gap: 8px;
+        width: 100%;
+    }
+
+    /* Eyebrow / Tag Atas */
+    .header-eyebrow {
+        font-size: clamp(11px, 1.2vw, 13px);
+        font-weight: 500;
+        color: #94a3b8;
+        display: flex;
+        align-items: center;
+        gap: 8px;
         margin: 0;
+    }
+
+    .eyebrow-bold {
+        font-weight: 700;
+        color: #1d4ed8;
+        letter-spacing: 0.05em;
+        text-transform: uppercase;
+    }
+
+    .eyebrow-divider {
+        color: #cbd5e1;
+        font-weight: 300;
+    }
+
+    /* Judul Utama */
+    .header-title {
+        font-size: clamp(20px, 2.8vw, 28px) !important;
+        font-weight: 700 !important;
+        line-height: 1.3 !important;
+        color: #0f172a !important;
+        margin: 0 !important;
+        padding: 0 !important;
+        letter-spacing: -0.01em !important;
+    }
+
+    /* Dynamic / Highlighted Text (Simulated Annealing) */
+    .header-title i {
+        color: #1d4ed8;
+        font-style: italic;
+        font-weight: 600;
+    }
+
+    /* Deskripsi Sub-header */
+    .header-subtitle {
+        font-size: clamp(13px, 1.4vw, 15px);
+        line-height: 1.5;
+        color: #64748b;
+        margin: 4px 0 0 0;
+    }
+
+    /* Penyesuaian Responsif Layar Kecil (Mobile) */
+    @media (max-width: 640px) {
+        .header-card {
+            padding: 16px 18px;
+            gap: 14px;
+            border-radius: 10px;
+        }
+        
+        .accent-bar {
+            width: 3.5px;
+        }
+
+        .header-subtitle {
+            line-height: 1.45;
+        }
     }
 
     /* Metric Cards */
@@ -152,9 +219,9 @@ st.markdown(
 )
 
 
-# --- FUNGSI HITUNG RATA-RATA WAKTU TUNGGU (100% PERSIS KODE LAMA) ---
+# --- FUNGSI HITUNG RATA-RATA WAKTU TUNGGU ---
 def calculate_delay(state, demands):
-    discharge_rate = 0.55  # Kapasitas keluar (kendaraan/detik)
+    discharge_rate = 0.55
     yellow_time = 4
     total_cycle = sum(state) + (len(state) * yellow_time)
 
@@ -162,7 +229,7 @@ def calculate_delay(state, demands):
     total_vehicles = 0
 
     for i in range(len(state)):
-        arrival_rate = demands[i] / 60.0  # kend/detik
+        arrival_rate = demands[i] / 60.0
         green = state[i]
 
         arr = arrival_rate * total_cycle
@@ -186,11 +253,23 @@ def main():
     # HEADER BANNER
     st.markdown(
         """
-        <div class="header-container">
-            <p class="header-eyebrow">Kelompok 1 · Kompleksitas Algoritma</p>
-            <h1 class="header-title">Pengaturan Lampu Lalu Lintas Adaptif dengan Menggunakan Algoritma <i>Simulated Annealing</i></h1>
+        <div class="header-card">
+            <div class="accent-bar"></div>
+            <div class="header-content">
+                <p class="header-eyebrow">
+                    <span class="eyebrow-bold">Kelompok 1</span>
+                    <span class="eyebrow-divider">|</span>
+                    <span>Kompleksitas Algoritma</span>
+                </p>
+                <h1 class="header-title">
+                    Pengaturan Lampu Lalu Lintas Adaptif dengan Algoritma <i>Simulated Annealing</i>
+                </h1>
+                <p class="header-subtitle">
+                    Optimasi pengaturan waktu lampu lalu lintas untuk membantu mengurangi waktu tunggu kendaraan.
+                </p>
+            </div>
         </div>
-    """,
+        """,
         unsafe_allow_html=True,
     )
 
