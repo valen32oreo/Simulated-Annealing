@@ -461,38 +461,38 @@ def main():
         history = {"x": [0], "current": [current_delay], "best": [best_delay]}
 
         while T > T_min:
-            step += 1
+            # Lakukan 8 pencarian per tingkat suhu agar algoritma konvergen secara optimal
+            for _ in range(8):
+                step += 1
 
-            # Logika Neighbor Generation
-            neighbor = list(current_state)
-            i, j = random.sample(range(4), 2)
-            delta = random.choice([2, 3, 4, 5])
+                # Logika Neighbor Generation
+                neighbor = list(current_state)
+                i, j = random.sample(range(4), 2)
+                delta = random.choice([2, 3, 4, 5])
 
-            if neighbor[i] - delta >= 10 and neighbor[j] + delta <= 60:
-                neighbor[i] -= delta
-                neighbor[j] += delta
+                if neighbor[i] - delta >= 10 and neighbor[j] + delta <= 60:
+                    neighbor[i] -= delta
+                    neighbor[j] += delta
 
-            neighbor_delay = calculate_delay(neighbor, demands)
-            diff = neighbor_delay - current_delay
+                neighbor_delay = calculate_delay(neighbor, demands)
+                diff = neighbor_delay - current_delay
 
-            # Logika Metropolis Criterion
-            if diff < 0 or random.random() < math.exp(-diff / T):
-                current_state = neighbor
-                current_delay = neighbor_delay
-                if current_delay < best_delay:
-                    best_state = list(current_state)
-                    best_delay = current_delay
+                # Logika Metropolis Criterion
+                if diff < 0 or random.random() < math.exp(-diff / T):
+                    current_state = neighbor
+                    current_delay = neighbor_delay
+                    if current_delay < best_delay:
+                        best_state = list(current_state)
+                        best_delay = current_delay
 
-            history["x"].append(step)
-            history["current"].append(current_delay)
-            history["best"].append(best_delay)
+                history["x"].append(step)
+                history["current"].append(current_delay)
+                history["best"].append(best_delay)
 
             T *= alpha
 
             # UPDATE KPIS REALTIME
-            eff = round(
-                ((baseline_delay - best_delay) / baseline_delay) * 100, 1
-            )
+            eff = round(((baseline_delay - best_delay) / baseline_delay) * 100, 1)
             render_kpis(
                 baseline_delay,
                 s_delay=best_delay,
@@ -501,7 +501,7 @@ def main():
                 is_running=True,
             )
 
-            # UPDATE CHART REALTIME (MODERN COLOR PALETTE)
+            # UPDATE CHART REALTIME
             fig = go.Figure()
             fig.add_trace(
                 go.Scatter(
@@ -549,12 +549,12 @@ def main():
             )
             p_chart.plotly_chart(fig, use_container_width=True)
 
-            # UPDATE ALOKASI HIJAU REALTIME
+            # UPDATE ALOKASI HIJAU REALTIME (Gunakan best_state)
             phases = [
-                ("⬆️ Arah Utara", demands[0], current_state[0]),
-                ("⬇️ Arah Selatan", demands[1], current_state[1]),
-                ("➡️ Arah Timur", demands[2], current_state[2]),
-                ("⬅️ Arah Barat", demands[3], current_state[3]),
+                ("⬆️ Arah Utara", demands[0], best_state[0]),
+                ("⬇️ Arah Selatan", demands[1], best_state[1]),
+                ("➡️ Arah Timur", demands[2], best_state[2]),
+                ("⬅️ Arah Barat", demands[3], best_state[3]),
             ]
             with p_alloc.container():
                 for label, dem, val in phases:
@@ -571,7 +571,7 @@ def main():
                     )
                     st.progress(val / 100)
 
-            time.sleep(0.03)
+            time.sleep(0.01)
 
 
 if __name__ == "__main__":
