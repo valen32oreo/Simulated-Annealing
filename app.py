@@ -562,7 +562,7 @@ def main():
                         f"""
                         <div class="phase-card">
                             <div class="phase-title">
-                                <span>{label} <small style="color:#64748b; font-weight:normal;">({dem} kendaraan/mnt)</small></span>
+                                <span>{label} <small style="color:#64748b; font-weight:normal;">({dem} kend/mnt)</small></span>
                                 <span class="phase-time">{val} detik</span>
                             </div>
                         </div>
