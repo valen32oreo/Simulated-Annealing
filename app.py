@@ -196,7 +196,7 @@ def main():
         """
         <div class="header-container">
             <p class="header-eyebrow">Kelompok 1 · Kompleksitas Algoritma</p>
-            <h1 class="header-title">Pengaturan Lampu Lalu Lintas Adaptif dengan Menggunakan Algoritma Simulated Annealing</h1>
+            <h1 class="header-title">Pengaturan Lampu Lalu Lintas Adaptif dengan Menggunakan Algoritma <i>Simulated Annealing</i></h1>
             <p class="header-subtitle">Menggunakan Algoritma Simulated Annealing (SA)</p>
         </div>
     """,
