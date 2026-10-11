@@ -311,10 +311,12 @@ def main():
     # Information Expander di Sidebar
     with st.sidebar.expander("Landasan Teori Algoritma"):
         st.markdown("""
-        **Simulated Annealing (SA)** mensimulasikan proses pendinginan logam untuk menemukan solusi optimal global:
-        - **State ($S$)**: Alokasi waktu hijau 4 lajur.
-        - **Cost ($E$)**: Rata-rata waktu tunggu kendaraan (s).
-        - **Eksplorasi**: Menerima solusi buruk dengan probabilitas $P = e^{-\Delta E / T}$ saat suhu ($T$) tinggi.
+        *Simulated Annealing (SA)* mensimulasikan proses pendinginan logam untuk menemukan solusi optimal global:
+
+        - **State ($S$)**: Alokasi waktu sinyal hijau 4 lajur.
+        - **Cost / Fungsi Biaya ($E$)**: Rata-rata waktu tunggu kendaraan (detik) yang ingin diminimalkan.
+        - **Suhu ($T$)**: Mengontrol keberanian eksplorasi. Suhu tinggi memungkinkan algoritma melompat dari jebakan *local optima* (alokasi yang kelihatan bagus padahal belum maksimal).
+        - **Pendinginan (α)**: Mengontrol transisi dari mode **penjelajahan bebas di awal** menjadi **penguncian solusi terbaik di akhir** ($P = e^{-\\Delta E / T}$).
         """)
 
     # BASELINE COMPUTATION
