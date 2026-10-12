@@ -23,7 +23,7 @@ st.markdown(
 
     /* Layout Container Utama */
     .block-container {
-        padding-top: 1.8rem;
+        padding-top: 3.8rem !important;
         padding-bottom: 2rem;
         padding-left: 1rem;
         padding-right: 1rem;
