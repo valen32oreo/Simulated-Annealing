@@ -319,7 +319,7 @@ def main():
     st.sidebar.markdown(
         """
         <div class="sidebar-header">
-            <div class="sidebar-header-title">Panel Kontrol</div>
+            <div class="sidebar-header-title">Panel Kontrol Simulasi</div>
             <div class="sidebar-header-sub">Atur variabel skenario & parameter optimasi</div>
         </div>
         """,
