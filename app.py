@@ -203,7 +203,6 @@ st.markdown(
 
     .sidebar-header {
         margin-bottom: 20px;
-        padding-top: 0px;
         padding-bottom: 12px;
         border-bottom: 1px solid #e2e8f0;
     }
