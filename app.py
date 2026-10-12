@@ -26,12 +26,12 @@ st.markdown(
         background: #ffffff;
         border: 1px solid #e2e8f0;
         border-radius: 12px;
-        padding: clamp(20px, 3.5vw, 32px);
+        padding: clamp(16px, 3vw, 28px);
         box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.05);
         display: flex;
-        gap: clamp(16px, 2.5vw, 24px);
+        gap: clamp(12px, 2vw, 20px);
         align-items: stretch;
-        margin-bottom: 24px;
+        margin-bottom: 20px;
     }
 
     /* Left Accent Bar Warna Biru */
@@ -46,7 +46,7 @@ st.markdown(
     .header-content {
         display: flex;
         flex-direction: column;
-        gap: 8px;
+        gap: 6px;
         width: 100%;
     }
 
@@ -75,7 +75,7 @@ st.markdown(
 
     /* Judul Utama */
     .header-title {
-        font-size: clamp(20px, 2.8vw, 28px) !important;
+        font-size: clamp(18px, 2.5vw, 26px) !important;
         font-weight: 700 !important;
         line-height: 1.3 !important;
         color: #0f172a !important;
@@ -93,63 +93,59 @@ st.markdown(
 
     /* Deskripsi Sub-header */
     .header-subtitle {
-        font-size: clamp(13px, 1.4vw, 15px);
-        line-height: 1.5;
+        font-size: clamp(12px, 1.3vw, 14px);
+        line-height: 1.45;
         color: #64748b;
-        margin: 4px 0 0 0;
+        margin: 2px 0 0 0;
     }
 
-    /* Penyesuaian Responsif Layar Kecil (Mobile) */
-    @media (max-width: 640px) {
-        .header-card {
-            padding: 16px 18px;
-            gap: 14px;
-            border-radius: 10px;
-        }
-        
-        .accent-bar {
-            width: 3.5px;
-        }
-
-        .header-subtitle {
-            line-height: 1.45;
-        }
+    /* CSS Grid untuk Metric Cards (4x1 di Desktop, 2x2 di Mobile) */
+    .metrics-container {
+        display: grid;
+        grid-template-columns: repeat(4, 1fr);
+        gap: 14px;
+        margin-bottom: 20px;
     }
 
-    /* Metric Cards */
     .metric-card {
         background: #ffffff;
         border: 1px solid #e2e8f0;
-        border-radius: 14px;
-        padding: 20px 16px;
+        border-radius: 12px;
+        padding: 16px 12px;
         text-align: center;
-        box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.05), 0 2px 4px -1px rgba(0, 0, 0, 0.03);
+        box-shadow: 0 2px 4px rgba(0, 0, 0, 0.04);
         transition: all 0.2s ease;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
     }
 
     .metric-card:hover {
         transform: translateY(-2px);
-        box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.08);
+        box-shadow: 0 8px 12px -2px rgba(0, 0, 0, 0.06);
     }
 
     .metric-icon {
-        font-size: 20px;
-        margin-bottom: 6px;
+        font-size: 18px;
+        margin-bottom: 4px;
     }
 
     .metric-label {
-        font-size: 12px;
+        font-size: 11px;
         color: #64748b;
         font-weight: 600;
         text-transform: uppercase;
-        letter-spacing: 0.5px;
+        letter-spacing: 0.4px;
+        line-height: 1.2;
     }
 
     .metric-value {
-        font-size: 28px;
+        font-size: clamp(20px, 2.2vw, 26px);
         color: #0f172a;
         font-weight: 800;
-        margin-top: 6px;
+        margin-top: 4px;
+        line-height: 1.1;
     }
 
     .metric-value-red {
@@ -168,14 +164,14 @@ st.markdown(
     .phase-card {
         background: #f8fafc;
         border: 1px solid #e2e8f0;
-        border-radius: 12px;
-        padding: 14px 18px;
-        margin-bottom: 12px;
+        border-radius: 10px;
+        padding: 12px 14px;
+        margin-bottom: 10px;
     }
 
     .phase-title {
         font-weight: 700;
-        font-size: 14px;
+        font-size: 13.5px;
         color: #1e293b;
         display: flex;
         justify-content: space-between;
@@ -183,13 +179,63 @@ st.markdown(
     }
 
     .phase-time {
-        font-size: 16px;
+        font-size: 14px;
         font-weight: 800;
         color: #2563eb;
         background: #eff6ff;
-        padding: 2px 10px;
-        border-radius: 8px;
+        padding: 2px 8px;
+        border-radius: 6px;
         border: 1px solid #bfdbfe;
+    }
+
+    /* Penyesuaian Responsif Layar Kecil (Mobile / Smartphone) */
+    @media (max-width: 768px) {
+        .header-card {
+            padding: 14px 16px;
+            gap: 12px;
+            border-radius: 10px;
+        }
+
+        .accent-bar {
+            width: 3px;
+        }
+
+        .metrics-container {
+            grid-template-columns: repeat(2, 1fr);
+            gap: 10px;
+        }
+
+        .metric-card {
+            padding: 12px 8px;
+            border-radius: 10px;
+        }
+
+        .metric-icon {
+            font-size: 16px;
+            margin-bottom: 2px;
+        }
+
+        .metric-label {
+            font-size: 10px;
+        }
+
+        .metric-value {
+            font-size: 18px;
+        }
+
+        .phase-card {
+            padding: 10px 12px;
+            margin-bottom: 8px;
+        }
+
+        .phase-title {
+            font-size: 12.5px;
+        }
+
+        .phase-time {
+            font-size: 13px;
+            padding: 2px 6px;
+        }
     }
 
     /* Streamlit Components Overrides */
@@ -201,8 +247,8 @@ st.markdown(
     .stButton>button {
         border-radius: 12px;
         font-weight: 700;
-        font-size: 16px;
-        padding: 12px 24px;
+        font-size: 15px;
+        padding: 12px 20px;
         background: linear-gradient(135deg, #2563eb 0%, #1d4ed8 100%);
         box-shadow: 0 4px 12px rgba(37, 99, 235, 0.25);
         transition: all 0.2s ease;
@@ -323,12 +369,8 @@ def main():
     fixed_state = [25, 25, 25, 25]
     baseline_delay = calculate_delay(fixed_state, demands)
 
-    # METRIC CARDS (BARIS ATAS)
-    col1, col2, col3, col4 = st.columns(4)
-    p_statis = col1.empty()
-    p_sa = col2.empty()
-    p_efficiency = col3.empty()
-    p_temp = col4.empty()
+    # METRIC CARDS PLACEHOLDER (RESPONSIF GRID)
+    p_kpis = st.empty()
 
     st.markdown("<br>", unsafe_allow_html=True)
 
@@ -345,53 +387,43 @@ def main():
 
     st.markdown("<br>", unsafe_allow_html=True)
 
-    # RENDER TAMPILAN AWAL / DEFAULT (SEBELUM RUN)
+    # RENDER TAMPILAN METRIC CARDS
     def render_kpis(
         b_delay, s_delay="--", eff_val="--", temp_val=t_0, is_running=False
     ):
-        p_statis.markdown(
-            f"""
-            <div class="metric-card">
-                <div class="metric-icon">🔴</div>
-                <div class="metric-label">Sistem Statis (Biasa)</div>
-                <div class="metric-value metric-value-red">{b_delay} <span style="font-size:16px;">s</span></div>
-            </div>
-        """,
-            unsafe_allow_html=True,
-        )
-
         sa_class = "metric-value-green" if is_running else ""
-        p_sa.markdown(
-            f"""
-            <div class="metric-card">
-                <div class="metric-icon">🟢</div>
-                <div class="metric-label">Hasil Optimal SA</div>
-                <div class="metric-value {sa_class}">{s_delay} <span style="font-size:16px;">s</span></div>
-            </div>
-        """,
-            unsafe_allow_html=True,
-        )
-
         eff_str = f"+{eff_val}%" if is_running else "-- %"
-        p_efficiency.markdown(
-            f"""
-            <div class="metric-card">
-                <div class="metric-icon">⚡</div>
-                <div class="metric-label">Efisiensi Kelancaran</div>
-                <div class="metric-value metric-value-green">{eff_str}</div>
-            </div>
-        """,
-            unsafe_allow_html=True,
+        s_delay_str = (
+            f"{s_delay} <span style='font-size:14px;'>s</span>"
+            if (is_running or s_delay != "--")
+            else "-- s"
         )
 
-        p_temp.markdown(
+        p_kpis.markdown(
             f"""
-            <div class="metric-card">
-                <div class="metric-icon">🔥</div>
-                <div class="metric-label">Suhu Sistem (T)</div>
-                <div class="metric-value metric-value-blue">{temp_val:.1f}</div>
+            <div class="metrics-container">
+                <div class="metric-card">
+                    <div class="metric-icon">🔴</div>
+                    <div class="metric-label">Sistem Statis</div>
+                    <div class="metric-value metric-value-red">{b_delay} <span style="font-size:14px;">s</span></div>
+                </div>
+                <div class="metric-card">
+                    <div class="metric-icon">🟢</div>
+                    <div class="metric-label">Hasil Optimal SA</div>
+                    <div class="metric-value {sa_class}">{s_delay_str}</div>
+                </div>
+                <div class="metric-card">
+                    <div class="metric-icon">⚡</div>
+                    <div class="metric-label">Efisiensi</div>
+                    <div class="metric-value metric-value-green">{eff_str}</div>
+                </div>
+                <div class="metric-card">
+                    <div class="metric-icon">🔥</div>
+                    <div class="metric-label">Suhu Sistem (T)</div>
+                    <div class="metric-value metric-value-blue">{temp_val:.1f}</div>
+                </div>
             </div>
-        """,
+            """,
             unsafe_allow_html=True,
         )
 
@@ -410,10 +442,10 @@ def main():
         )
     )
     fig_init.update_layout(
-        height=350,
-        margin=dict(l=20, r=20, t=20, b=20),
+        height=320,
+        margin=dict(l=15, r=15, t=15, b=15),
         xaxis_title="Iterasi (Langkah Optimasi)",
-        yaxis_title="Rata-rata Waktu Tunggu (Detik/Kendaraan)",
+        yaxis_title="Rata-rata Waktu Tunggu (Detik)",
         plot_bgcolor="#ffffff",
         paper_bgcolor="#ffffff",
         hovermode="x unified",
@@ -421,14 +453,14 @@ def main():
             orientation="h", yanchor="bottom", y=1.02, xanchor="right", x=1
         ),
     )
-    p_chart.plotly_chart(fig_init, use_container_width=True)
+    p_chart.plotly_chart(fig_init, use_container_width=True, config={'displayModeBar': False})
 
     # INITIAL ALLOCATION PLACEHOLDER
     directions = [
-        ("⬆️ Utara", demands[0], fixed_state[0]),
-        ("⬇️ Selatan", demands[1], fixed_state[1]),
-        ("➡️ Timur", demands[2], fixed_state[2]),
-        ("⬅️ Barat", demands[3], fixed_state[3]),
+        ("⬆️ Lajur Utara", demands[0], fixed_state[0]),
+        ("⬇️ Lajur Selatan", demands[1], fixed_state[1]),
+        ("➡️ Lajur Timur", demands[2], fixed_state[2]),
+        ("⬅️ Lajur Barat", demands[3], fixed_state[3]),
     ]
     with p_alloc.container():
         for label, dem, val in directions:
@@ -437,7 +469,7 @@ def main():
                 <div class="phase-card">
                     <div class="phase-title">
                         <span>{label} <small style="color:#64748b; font-weight:normal;">({dem} kend/mnt)</small></span>
-                        <span class="phase-time">{val}s</span>
+                        <span class="phase-time">{val} detik</span>
                     </div>
                 </div>
             """,
@@ -534,8 +566,8 @@ def main():
             )
 
             fig.update_layout(
-                height=350,
-                margin=dict(l=20, r=20, t=20, b=20),
+                height=320,
+                margin=dict(l=15, r=15, t=15, b=15),
                 xaxis_title="Iterasi (Langkah Optimasi)",
                 yaxis_title="Rata-rata Waktu Tunggu (Detik)",
                 plot_bgcolor="#ffffff",
@@ -549,7 +581,7 @@ def main():
                     x=1,
                 ),
             )
-            p_chart.plotly_chart(fig, use_container_width=True)
+            p_chart.plotly_chart(fig, use_container_width=True, config={'displayModeBar': False})
 
             # UPDATE ALOKASI HIJAU REALTIME (Gunakan best_state)
             phases = [
