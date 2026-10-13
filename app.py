@@ -604,7 +604,7 @@ def main():
         unsafe_allow_html=True,
     )
 
-    st.sidebar.markdown('<div class="sidebar-tag">01. Skenario Lalu Lintas</div>', unsafe_allow_html=True)
+    st.sidebar.markdown('<div class="sidebar-tag">Skenario Lalu Lintas</div>', unsafe_allow_html=True)
     scenario = st.sidebar.selectbox(
         "Pilih Skenario Kepadatan:",
         [
