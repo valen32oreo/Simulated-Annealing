@@ -303,7 +303,7 @@ def render_traffic_animation(green_times, demands):
             }}
 
             #hud-north {{ top: 46px; right: 8px; border-left: 3px solid #38bdf8; }}
-            #hud-south {{ bottom: 8px; left: 8px; border-left: 3px solid #ffffff; }}
+            #hud-south {{ bottom: 8px; left: 8px; border-left: 3px solid #38bdf8; }}
             #hud-east  {{ bottom: 8px; right: 8px; border-left: 3px solid #38bdf8; }}
             #hud-west  {{ top: 46px; left: 8px; border-left: 3px solid #38bdf8; }}
 
