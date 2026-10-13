@@ -842,7 +842,7 @@ def main():
         st.session_state.best_delay = best_delay
         st.session_state.is_optimized = True
 
-    # RENDER METRIK & ALOKASI DARI SESSION STATE (SINKRON 100%)
+    # RENDER METRIK & ALOKASI DARI SESSION STATE
     if st.session_state.is_optimized:
         eff_final = round(((baseline_delay - st.session_state.best_delay) / baseline_delay) * 100, 1)
         render_kpis(baseline_delay, s_delay=st.session_state.best_delay, eff_val=eff_final, temp_val=0.5, is_running=False)
