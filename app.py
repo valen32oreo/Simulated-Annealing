@@ -5,7 +5,7 @@ import plotly.graph_objects as go
 import streamlit as st
 import streamlit.components.v1 as components
 
-# KONFIGURASI HALAMAN
+# --- KONFIGURASI HALAMAN ---
 st.set_page_config(
     page_title="Traffic Optimizer - Simulated Annealing",
     page_icon="🚦",
@@ -151,18 +151,18 @@ st.markdown(
         border: 1px solid #bfdbfe;
     }
 
-    /* Media Queries untuk Mobile */
+    /* Media Queries untuk Mobile Optimization */
     @media (max-width: 768px) {
         .block-container {
-            padding-top: 3rem !important;
-            padding-left: 0.75rem;
-            padding-right: 0.75rem;
+            padding-top: 4rem !important;
+            padding-left: 0.6rem !important;
+            padding-right: 0.6rem !important;
         }
 
         .header-card {
             flex-direction: column;
             padding: 14px 16px;
-            gap: 10px;
+            gap: 8px;
         }
 
         .accent-bar {
@@ -171,11 +171,11 @@ st.markdown(
         }
 
         .header-title {
-            font-size: 18px !important;
+            font-size: 17px !important;
         }
 
         .header-subtitle {
-            font-size: 12px;
+            font-size: 11.5px;
         }
 
         .metrics-container {
@@ -193,21 +193,6 @@ st.markdown(
 
         .metric-value {
             font-size: 18px;
-        }
-    }
-
-    @media (max-width: 480px) {
-        .metrics-container {
-            grid-template-columns: repeat(2, 1fr);
-            gap: 6px;
-        }
-
-        .metric-card {
-            padding: 8px 10px;
-        }
-
-        .metric-value {
-            font-size: 16px;
         }
     }
 
@@ -255,163 +240,143 @@ st.markdown(
     .stButton>button:hover {
         background: #1d4ed8;
     }
-
     </style>
 """,
     unsafe_allow_html=True,
 )
 
 
-# FUNGSI RENDER VISUALISASI CANVAS PERSIMPANGAN RESPONSIF
+# --- FUNGSI RENDER VISUALISASI CANVAS RESPONSIF DENGAN DYNAMIC AUTO-RESIZE ---
 def render_traffic_animation(green_times, demands):
     html_code = f"""
     <!DOCTYPE html>
     <html>
     <head>
-        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
         <style>
-            * {{
-                box-sizing: border-box;
-            }}
-            body {{
-                margin: 0;
-                padding: 0;
+            * {{ box-sizing: border-box; }}
+            html, body {{
+                margin: 0; padding: 0;
+                width: 100%; height: 100%;
                 background: #090d16;
                 font-family: 'Inter', system-ui, -apple-system, sans-serif;
-                display: flex;
-                justify-content: center;
-                align-items: center;
-                color: #f8fafc;
                 overflow: hidden;
             }}
             #canvas-container {{
                 position: relative;
-                width: 100%;
-                max-width: 680px;
-                height: 400px;
-                background: #090d16;
-                border-radius: 10px;
-                overflow: hidden;
-                border: 1px solid #1e293b;
+                width: 100%; height: 100%;
+                background: #090d16; border-radius: 10px;
+                overflow: hidden; border: 1px solid #1e293b;
             }}
             canvas {{
-                width: 100%;
-                height: 100%;
+                width: 100%; height: 100%;
                 display: block;
             }}
+            
             .info-panel {{
-                position: absolute;
-                top: 10px;
-                left: 10px;
-                right: 10px;
+                position: absolute; top: 8px; left: 8px; right: 8px;
                 background: rgba(15, 23, 42, 0.92);
-                border: 1px solid #334155;
-                padding: 6px 12px;
-                border-radius: 8px;
-                font-size: 11px;
-                font-weight: 600;
-                display: flex;
-                justify-content: space-between;
-                align-items: center;
-                z-index: 10;
-                flex-wrap: wrap;
-                gap: 6px;
+                border: 1px solid #334155; padding: 6px 12px;
+                border-radius: 6px; font-size: 11px; font-weight: 700;
+                display: flex; justify-content: space-between; align-items: center;
+                z-index: 20; box-shadow: 0 2px 8px rgba(0,0,0,0.3);
+                color: #f8fafc;
             }}
             .status-badge {{
-                display: inline-block;
-                width: 8px;
-                height: 8px;
-                border-radius: 50%;
-                margin-right: 4px;
+                display: inline-block; width: 8px; height: 8px;
+                border-radius: 50%; margin-right: 6px;
             }}
             .lane-hud {{
                 position: absolute;
                 background: rgba(15, 23, 42, 0.88);
-                border: 1px solid #334155;
-                color: #f8fafc;
-                padding: 3px 6px;
-                border-radius: 5px;
-                font-size: 10px;
-                font-weight: 700;
-                pointer-events: none;
-                z-index: 5;
+                border: 1px solid #334155; color: #f8fafc;
+                padding: 3px 6px; border-radius: 5px;
+                font-size: 10px; font-weight: 700;
+                pointer-events: none; z-index: 10;
+                white-space: nowrap;
             }}
-            #hud-north {{ top: 46px; right: 10px; border-left: 3px solid #ef4444; }}
-            #hud-south {{ bottom: 10px; left: 10px; border-left: 3px solid #3b82f6; }}
-            #hud-east  {{ bottom: 10px; right: 10px; border-left: 3px solid #f59e0b; }}
-            #hud-west  {{ top: 46px; left: 10px; border-left: 3px solid #10b981; }}
+            #hud-north {{ top: 46px; right: 8px; border-left: 3px solid #38bdf8; }}
+            #hud-south {{ bottom: 8px; left: 8px; border-left: 3px solid #38bdf8; }}
+            #hud-east  {{ bottom: 8px; right: 8px; border-left: 3px solid #38bdf8; }}
+            #hud-west  {{ top: 46px; left: 8px; border-left: 3px solid #38bdf8; }}
 
             @media (max-width: 480px) {{
-                #canvas-container {{
-                    height: 340px;
-                }}
-                .info-panel {{
-                    font-size: 10px;
-                    padding: 4px 8px;
-                }}
-                .lane-hud {{
-                    font-size: 9px;
-                    padding: 2px 4px;
-                }}
-                #hud-north {{ top: 42px; right: 6px; }}
-                #hud-west  {{ top: 42px; left: 6px; }}
-                #hud-south {{ bottom: 6px; left: 6px; }}
-                #hud-east  {{ bottom: 6px; right: 6px; }}
+                .info-panel {{ font-size: 9.5px; padding: 4px 8px; }}
+                .lane-hud {{ font-size: 8.5px; padding: 2px 4px; }}
+                #hud-north {{ top: 38px; }}
+                #hud-west  {{ top: 38px; }}
             }}
         </style>
     </head>
     <body>
         <div id="canvas-container">
             <div class="info-panel">
-                <span><span class="status-badge" id="badge-color" style="background:#10b981;"></span><span id="active-text">Lajur Aktif: Utara</span></span>
-                <span id="timer-text" style="color:#38bdf8;">Sisa Hijau: --s</span>
-                <span id="queue-text" style="color:#94a3b8;">Antrean: 0 kend</span>
+                <span><span class="status-badge" id="badge-color" style="background:#10b981;"></span><span id="active-text">Sinyal Aktif: Utara</span></span>
+                <span id="timer-text" style="color:#38bdf8;">Sisa: --s</span>
+                <span id="queue-text" style="color:#94a3b8;">Antrean: 0</span>
             </div>
 
-            <div class="lane-hud" id="hud-north">Utara: {green_times[0]}s ({demands[0]} kend/m)</div>
-            <div class="lane-hud" id="hud-south">Selatan: {green_times[1]}s ({demands[1]} kend/m)</div>
-            <div class="lane-hud" id="hud-east">Timur: {green_times[2]}s ({demands[2]} kend/m)</div>
-            <div class="lane-hud" id="hud-west">Barat: {green_times[3]}s ({demands[3]} kend/m)</div>
+            <div class="lane-hud" id="hud-north">Utara: {green_times[0]}s ({demands[0]} k/m)</div>
+            <div class="lane-hud" id="hud-south">Selatan: {green_times[1]}s ({demands[1]} k/m)</div>
+            <div class="lane-hud" id="hud-east">Timur: {green_times[2]}s ({demands[2]} k/m)</div>
+            <div class="lane-hud" id="hud-west">Barat: {green_times[3]}s ({demands[3]} k/m)</div>
 
-            <canvas id="trafficCanvas" width="680" height="400"></canvas>
+            <canvas id="trafficCanvas"></canvas>
         </div>
 
         <script>
             const canvas = document.getElementById('trafficCanvas');
             const ctx = canvas.getContext('2d');
-            
-            const greenTimes = {green_times}; // [Utara, Selatan, Timur, Barat]
-            const demands = {demands};       // [Utara, Selatan, Timur, Barat]
+            const container = document.getElementById('canvas-container');
+
+            const greenTimes = {green_times};
+            const demands = {demands};
             const yellowTime = 4;
 
-            const W = 680, H = 400;
-            const roadW = 90;
-            const cx = W / 2, cy = H / 2;
+            let W = 680, H = 360;
+            let roadW = 80;
+            let cx = W / 2, cy = H / 2;
 
-            let currentPhase = 0; // 0: Utara, 1: Selatan, 2: Timur, 3: Barat
+            function updateCanvasSize() {{
+                W = container.clientWidth;
+                H = container.clientHeight;
+                canvas.width = W;
+                canvas.height = H;
+                roadW = Math.min(80, W * 0.18);
+                cx = W / 2;
+                cy = H / 2 + (W < 480 ? 12 : 10);
+            }}
+
+            window.addEventListener('resize', updateCanvasSize);
+            updateCanvasSize();
+
+            let currentPhase = 0;
             let phaseState = 'GREEN';
             let timer = greenTimes[0];
             let cars = [];
 
+            const carColors = ['#e2e8f0', '#cbd5e1', '#94a3b8', '#64748b', '#38bdf8'];
+
             class Car {{
                 constructor(dir) {{
                     this.dir = dir; 
-                    this.speed = 2.4;
+                    this.speed = 2.2;
                     this.stopped = false;
-                    this.w = (dir === 0 || dir === 1) ? 14 : 24;
-                    this.h = (dir === 0 || dir === 1) ? 24 : 14;
+                    this.color = carColors[Math.floor(Math.random() * carColors.length)];
+                    this.w = (dir === 0 || dir === 1) ? 12 : 22;
+                    this.h = (dir === 0 || dir === 1) ? 22 : 12;
 
-                    if (dir === 0) {{ this.x = cx - 22; this.y = -30; }}
-                    else if (dir === 1) {{ this.x = cx + 22; this.y = H + 30; }}
-                    else if (dir === 2) {{ this.x = W + 30; this.y = cy - 22; }}
-                    else if (dir === 3) {{ this.x = -30; this.y = cy + 22; }}
+                    if (dir === 0) {{ this.x = cx - roadW*0.25; this.y = 40; }}
+                    else if (dir === 1) {{ this.x = cx + roadW*0.25; this.y = H + 30; }}
+                    else if (dir === 2) {{ this.x = W + 30; this.y = cy - roadW*0.25; }}
+                    else if (dir === 3) {{ this.x = -30; this.y = cy + roadW*0.25; }}
                 }}
 
                 move() {{
-                    let stopY_North = cy - roadW/2 - 16;
-                    let stopY_South = cy + roadW/2 + 16;
-                    let stopX_East  = cx + roadW/2 + 16;
-                    let stopX_West  = cx - roadW/2 - 16;
+                    let stopY_North = cy - roadW/2 - 14;
+                    let stopY_South = cy + roadW/2 + 14;
+                    let stopX_East  = cx + roadW/2 + 14;
+                    let stopX_West  = cx - roadW/2 - 14;
 
                     let isGreen = (currentPhase === this.dir && phaseState === 'GREEN');
 
@@ -425,10 +390,10 @@ def render_traffic_animation(green_times, demands):
 
                     cars.forEach(other => {{
                         if (other !== this && other.dir === this.dir && other.stopped) {{
-                            if (this.dir === 0 && this.y < other.y && other.y - this.y < 30) this.stopped = true;
-                            if (this.dir === 1 && this.y > other.y && this.y - other.y < 30) this.stopped = true;
-                            if (this.dir === 2 && this.x > other.x && this.x - other.x < 30) this.stopped = true;
-                            if (this.dir === 3 && this.x < other.x && other.x - this.x < 30) this.stopped = true;
+                            if (this.dir === 0 && this.y < other.y && other.y - this.y < 28) this.stopped = true;
+                            if (this.dir === 1 && this.y > other.y && this.y - other.y < 28) this.stopped = true;
+                            if (this.dir === 2 && this.x > other.x && this.x - other.x < 28) this.stopped = true;
+                            if (this.dir === 3 && this.x < other.x && other.x - this.x < 28) this.stopped = true;
                         }}
                     }});
 
@@ -444,16 +409,24 @@ def render_traffic_animation(green_times, demands):
                     ctx.save();
                     ctx.translate(this.x, this.y);
                     
-                    ctx.fillStyle = this.dir === 0 ? '#ef4444' : this.dir === 1 ? '#3b82f6' : this.dir === 2 ? '#f59e0b' : '#10b981';
+                    ctx.fillStyle = this.color;
                     ctx.beginPath();
-                    ctx.roundRect(-this.w/2, -this.h/2, this.w, this.h, 3);
+                    ctx.roundRect(-this.w/2, -this.h/2, this.w, this.h, 2);
                     ctx.fill();
 
                     ctx.fillStyle = '#0f172a';
-                    if (this.dir === 0) ctx.fillRect(-this.w/2 + 2, 2, this.w - 4, 4);
-                    if (this.dir === 1) ctx.fillRect(-this.w/2 + 2, -6, this.w - 4, 4);
-                    if (this.dir === 2) ctx.fillRect(-6, -this.h/2 + 2, 4, this.h - 4);
-                    if (this.dir === 3) ctx.fillRect(2, -this.h/2 + 2, 4, this.h - 4);
+                    if (this.dir === 0) ctx.fillRect(-this.w/2 + 2, 2, this.w - 4, 3);
+                    if (this.dir === 1) ctx.fillRect(-this.w/2 + 2, -5, this.w - 4, 3);
+                    if (this.dir === 2) ctx.fillRect(-5, -this.h/2 + 2, 3, this.h - 4);
+                    if (this.dir === 3) ctx.fillRect(2, -this.h/2 + 2, 3, this.h - 4);
+
+                    if (this.stopped) {{
+                        ctx.fillStyle = '#ef4444';
+                        if (this.dir === 0) {{ ctx.fillRect(-this.w/2, -this.h/2, 2, 2); ctx.fillRect(this.w/2 - 2, -this.h/2, 2, 2); }}
+                        if (this.dir === 1) {{ ctx.fillRect(-this.w/2, this.h/2 - 2, 2, 2); ctx.fillRect(this.w/2 - 2, this.h/2 - 2, 2, 2); }}
+                        if (this.dir === 2) {{ ctx.fillRect(this.w/2 - 2, -this.h/2, 2, 2); ctx.fillRect(this.w/2 - 2, this.h/2 - 2, 2, 2); }}
+                        if (this.dir === 3) {{ ctx.fillRect(-this.w/2, -this.h/2, 2, 2); ctx.fillRect(-this.w/2, this.h/2 - 2, 2, 2); }}
+                    }}
 
                     ctx.restore();
                 }}
@@ -490,8 +463,8 @@ def render_traffic_animation(green_times, demands):
             }}, 1000);
 
             function drawZebra(x, y, w, h, vertical) {{
-                ctx.fillStyle = '#475569';
-                let count = 5;
+                ctx.fillStyle = '#334155';
+                let count = 4;
                 for(let i = 0; i < count; i++) {{
                     if(vertical) ctx.fillRect(x + (i * (w/count)), y, w/(count*2), h);
                     else ctx.fillRect(x, y + (i * (h/count)), w, h/(count*2));
@@ -499,41 +472,41 @@ def render_traffic_animation(green_times, demands):
             }}
 
             function drawTrafficLightPost(x, y, color) {{
-                ctx.fillStyle = '#0f172a';
-                ctx.fillRect(x - 8, y - 8, 16, 16);
-                ctx.strokeStyle = '#334155';
+                ctx.fillStyle = '#020617';
+                ctx.fillRect(x - 7, y - 7, 14, 14);
+                ctx.strokeStyle = '#475569';
                 ctx.lineWidth = 1;
-                ctx.strokeRect(x - 8, y - 8, 16, 16);
+                ctx.strokeRect(x - 7, y - 7, 14, 14);
 
                 ctx.fillStyle = color;
                 ctx.beginPath();
-                ctx.arc(x, y, 5, 0, Math.PI * 2);
+                ctx.arc(x, y, 4.5, 0, Math.PI * 2);
                 ctx.fill();
             }}
 
             function animate() {{
                 ctx.clearRect(0, 0, W, H);
 
-                ctx.fillStyle = '#0f172a';
+                ctx.fillStyle = '#090d16';
                 ctx.fillRect(0, 0, W, H);
 
                 ctx.fillStyle = '#1e293b';
-                ctx.fillRect(cx - roadW/2, 0, roadW, H);
+                ctx.fillRect(cx - roadW/2, 40, roadW, H - 40);
                 ctx.fillRect(0, cy - roadW/2, W, roadW);
 
-                drawZebra(cx - roadW/2, cy - roadW/2 - 16, roadW, 12, true);
-                drawZebra(cx - roadW/2, cy + roadW/2 + 4, roadW, 12, true);
-                drawZebra(cx - roadW/2 - 16, cy - roadW/2, 12, roadW, false);
-                drawZebra(cx + roadW/2 + 4, cy - roadW/2, 12, roadW, false);
+                drawZebra(cx - roadW/2, cy - roadW/2 - 14, roadW, 10, true);
+                drawZebra(cx - roadW/2, cy + roadW/2 + 4, roadW, 10, true);
+                drawZebra(cx - roadW/2 - 14, cy - roadW/2, 10, roadW, false);
+                drawZebra(cx + roadW/2 + 4, cy - roadW/2, 10, roadW, false);
 
                 ctx.strokeStyle = '#475569';
-                ctx.lineWidth = 2;
-                ctx.setLineDash([8, 8]);
+                ctx.lineWidth = 1.5;
+                ctx.setLineDash([6, 6]);
                 ctx.beginPath();
-                ctx.moveTo(cx, 0); ctx.lineTo(cx, cy - roadW/2 - 16);
-                ctx.moveTo(cx, cy + roadW/2 + 16); ctx.lineTo(cx, H);
-                ctx.moveTo(0, cy); ctx.lineTo(cx - roadW/2 - 16, cy);
-                ctx.moveTo(cx + roadW/2 + 16, cy); ctx.lineTo(W, cy);
+                ctx.moveTo(cx, 40); ctx.lineTo(cx, cy - roadW/2 - 14);
+                ctx.moveTo(cx, cy + roadW/2 + 14); ctx.lineTo(cx, H);
+                ctx.moveTo(0, cy); ctx.lineTo(cx - roadW/2 - 14, cy);
+                ctx.moveTo(cx + roadW/2 + 14, cy); ctx.lineTo(W, cy);
                 ctx.stroke();
 
                 const lights = [0,1,2,3].map(i => {{
@@ -541,15 +514,15 @@ def render_traffic_animation(green_times, demands):
                     return '#ef4444';
                 }});
 
-                drawTrafficLightPost(cx - roadW/2 - 14, cy - roadW/2 - 14, lights[0]);
-                drawTrafficLightPost(cx + roadW/2 + 14, cy + roadW/2 + 14, lights[1]);
-                drawTrafficLightPost(cx + roadW/2 + 14, cy - roadW/2 - 14, lights[2]);
-                drawTrafficLightPost(cx - roadW/2 - 14, cy + roadW/2 + 14, lights[3]);
+                drawTrafficLightPost(cx - roadW/2 - 12, cy - roadW/2 - 12, lights[0]);
+                drawTrafficLightPost(cx + roadW/2 + 12, cy + roadW/2 + 12, lights[1]);
+                drawTrafficLightPost(cx + roadW/2 + 12, cy - roadW/2 - 12, lights[2]);
+                drawTrafficLightPost(cx - roadW/2 - 12, cy + roadW/2 + 12, lights[3]);
 
                 cars.forEach((car, index) => {{
                     car.move();
                     car.draw();
-                    if (car.x < -50 || car.x > W + 50 || car.y < -50 || car.y > H + 50) {{
+                    if (car.x < -40 || car.x > W + 40 || car.y < 20 || car.y > H + 40) {{
                         cars.splice(index, 1);
                     }}
                 }});
@@ -562,10 +535,10 @@ def render_traffic_animation(green_times, demands):
     </body>
     </html>
     """
-    components.html(html_code, height=410)
+    components.html(html_code, height=360)
 
 
-# FUNGSI HITUNG RATA-RATA WAKTU TUNGGU
+# --- FUNGSI HITUNG RATA-RATA WAKTU TUNGGU ---
 def calculate_delay(state, demands):
     discharge_rate = 0.55
     yellow_time = 4
@@ -592,7 +565,7 @@ def calculate_delay(state, demands):
     return round(avg_delay, 1)
 
 
-# MAIN APP
+# --- MAIN APP ---
 def main():
 
     # HEADER BANNER
