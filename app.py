@@ -24,7 +24,7 @@ st.markdown(
 
     /* Container Spacing & Layout Responsif */
     .block-container {
-        padding-top: 4rem !important;
+        padding-top: 3.5rem !important;
         padding-bottom: 2rem;
         padding-left: 1.25rem;
         padding-right: 1.25rem;
