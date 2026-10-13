@@ -630,7 +630,7 @@ def main():
         b = st.sidebar.slider("Barat", 5, 100, 15)
         demands = [u, s, t, b]
 
-    st.sidebar.markdown('<div class="sidebar-tag">02. Parameter Algoritma</div>', unsafe_allow_html=True)
+    st.sidebar.markdown('<div class="sidebar-tag">Parameter Algoritma</div>', unsafe_allow_html=True)
     t_0 = st.sidebar.slider("Suhu Awal (T₀)", 50.0, 300.0, 100.0, step=10.0, help="Suhu tinggi memperluas eksplorasi acak di awal pencarian.")
     alpha = st.sidebar.slider("Laju Pendinginan (α)", 0.80, 0.99, 0.92, step=0.01, help="Mengontrol kecepatan transisi menuju pencarian lokal.")
 
