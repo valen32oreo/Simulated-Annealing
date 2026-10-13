@@ -151,10 +151,10 @@ st.markdown(
         border: 1px solid #bfdbfe;
     }
 
-    /* Media Queries untuk Mobile Optimization */
+    /* Media Queries untuk Mobile */
     @media (max-width: 768px) {
         .block-container {
-            padding-top: 2rem !important;
+            padding-top: 5rem !important;
             padding-left: 0.75rem;
             padding-right: 0.75rem;
         }
@@ -255,6 +255,7 @@ st.markdown(
     .stButton>button:hover {
         background: #1d4ed8;
     }
+
     </style>
 """,
     unsafe_allow_html=True,
