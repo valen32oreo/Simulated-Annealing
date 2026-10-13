@@ -22,7 +22,7 @@ st.markdown(
         font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
     }
 
-    /* Container Spacing & Layout Responsif */
+    /* Container Spacing & Layout */
     .block-container {
         padding-top: 3.5rem !important;
         padding-bottom: 2rem;
@@ -30,7 +30,7 @@ st.markdown(
         padding-right: 1.25rem;
     }
 
-    /* Header Banner Responsif */
+    /* Header Banner */
     .header-card {
         background: #ffffff;
         border: 1px solid #e2e8f0;
@@ -87,7 +87,7 @@ st.markdown(
         margin: 2px 0 0 0;
     }
 
-    /* Metric Cards Grid Responsif */
+    /* Metric Cards Grid */
     .metrics-container {
         display: grid;
         grid-template-columns: repeat(4, 1fr);
@@ -196,7 +196,7 @@ st.markdown(
         }
     }
 
-    /* Sidebar Styling Responsif */
+    /* Sidebar Styling */
     div[data-testid="stSidebar"] {
         background-color: #f8fafc;
         border-right: 1px solid #e2e8f0;
