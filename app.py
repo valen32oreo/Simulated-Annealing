@@ -254,7 +254,9 @@ def render_traffic_animation(green_times, demands):
     <head>
         <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
         <style>
+        
             * {{ box-sizing: border-box; }}
+
             html, body {{
                 margin: 0; padding: 0;
                 width: 100%; height: 100%;
@@ -262,12 +264,14 @@ def render_traffic_animation(green_times, demands):
                 font-family: 'Inter', system-ui, -apple-system, sans-serif;
                 overflow: hidden;
             }}
+
             #canvas-container {{
                 position: relative;
                 width: 100%; height: 100%;
                 background: #090d16; border-radius: 10px;
                 overflow: hidden; border: 1px solid #1e293b;
             }}
+
             canvas {{
                 width: 100%; height: 100%;
                 display: block;
@@ -282,10 +286,12 @@ def render_traffic_animation(green_times, demands):
                 z-index: 20; box-shadow: 0 2px 8px rgba(0,0,0,0.3);
                 color: #f8fafc;
             }}
+
             .status-badge {{
                 display: inline-block; width: 8px; height: 8px;
                 border-radius: 50%; margin-right: 6px;
             }}
+
             .lane-hud {{
                 position: absolute;
                 background: rgba(15, 23, 42, 0.88);
@@ -295,6 +301,7 @@ def render_traffic_animation(green_times, demands):
                 pointer-events: none; z-index: 10;
                 white-space: nowrap;
             }}
+
             #hud-north {{ top: 46px; right: 8px; border-left: 3px solid #38bdf8; }}
             #hud-south {{ bottom: 8px; left: 8px; border-left: 3px solid #38bdf8; }}
             #hud-east  {{ bottom: 8px; right: 8px; border-left: 3px solid #38bdf8; }}
@@ -306,6 +313,7 @@ def render_traffic_animation(green_times, demands):
                 #hud-north {{ top: 38px; }}
                 #hud-west  {{ top: 38px; }}
             }}
+
         </style>
     </head>
     <body>
