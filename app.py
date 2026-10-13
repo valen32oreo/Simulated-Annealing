@@ -316,10 +316,10 @@ def render_traffic_animation(green_times, demands):
                 <span id="queue-text" style="color:#94a3b8;">Antrean: 0</span>
             </div>
 
-            <div class="lane-hud" id="hud-north">Utara: {green_times[0]}s ({demands[0]} k/m)</div>
-            <div class="lane-hud" id="hud-south">Selatan: {green_times[1]}s ({demands[1]} k/m)</div>
-            <div class="lane-hud" id="hud-east">Timur: {green_times[2]}s ({demands[2]} k/m)</div>
-            <div class="lane-hud" id="hud-west">Barat: {green_times[3]}s ({demands[3]} k/m)</div>
+            <div class="lane-hud" id="hud-north">Utara: {green_times[0]}s ({demands[0]} kend/menit)</div>
+            <div class="lane-hud" id="hud-south">Selatan: {green_times[1]}s ({demands[1]} kend/menit)</div>
+            <div class="lane-hud" id="hud-east">Timur: {green_times[2]}s ({demands[2]} kend/menit)</div>
+            <div class="lane-hud" id="hud-west">Barat: {green_times[3]}s ({demands[3]} kend/menit)</div>
 
             <canvas id="trafficCanvas"></canvas>
         </div>
