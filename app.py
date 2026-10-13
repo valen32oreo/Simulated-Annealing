@@ -5,7 +5,7 @@ import plotly.graph_objects as go
 import streamlit as st
 import streamlit.components.v1 as components
 
-# --- KONFIGURASI HALAMAN ---
+# KONFIGURASI HALAMAN
 st.set_page_config(
     page_title="Traffic Optimizer - Simulated Annealing",
     page_icon="🚦",
@@ -261,7 +261,7 @@ st.markdown(
 )
 
 
-# --- FUNGSI RENDER VISUALISASI CANVAS PERSIMPANGAN RESPONSIF ---
+# FUNGSI RENDER VISUALISASI CANVAS PERSIMPANGAN RESPONSIF
 def render_traffic_animation(green_times, demands):
     html_code = f"""
     <!DOCTYPE html>
@@ -564,7 +564,7 @@ def render_traffic_animation(green_times, demands):
     components.html(html_code, height=410)
 
 
-# --- FUNGSI HITUNG RATA-RATA WAKTU TUNGGU ---
+# FUNGSI HITUNG RATA-RATA WAKTU TUNGGU
 def calculate_delay(state, demands):
     discharge_rate = 0.55
     yellow_time = 4
@@ -591,7 +591,7 @@ def calculate_delay(state, demands):
     return round(avg_delay, 1)
 
 
-# --- MAIN APP ---
+# MAIN APP
 def main():
 
     # HEADER BANNER
