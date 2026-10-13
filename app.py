@@ -154,7 +154,7 @@ st.markdown(
     /* Media Queries untuk Mobile */
     @media (max-width: 768px) {
         .block-container {
-            padding-top: 5rem !important;
+            padding-top: 3rem !important;
             padding-left: 0.75rem;
             padding-right: 0.75rem;
         }
