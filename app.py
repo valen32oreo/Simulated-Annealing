@@ -246,7 +246,7 @@ st.markdown(
 )
 
 
-# FUNGSI RENDER VISUALISASI CANVAS RESPONSIF DENGAN DYNAMIC AUTO-RESIZE
+# FUNGSI RENDER VISUALISASI CANVAS
 def render_traffic_animation(green_times, demands):
     html_code = f"""
     <!DOCTYPE html>
@@ -582,7 +582,7 @@ def main():
         <div class="header-card">
             <div class="accent-bar"></div>
             <div class="header-content">
-                <p class="header-eyebrow">Kelompok 1 • Kompleksitas Algoritma</p>
+                <p class="header-eyebrow">Kelompok 1 | Kompleksitas Algoritma</p>
                 <h1 class="header-title">
                     Pengaturan Lampu Lalu Lintas Adaptif dengan <i>Simulated Annealing</i>
                 </h1>
