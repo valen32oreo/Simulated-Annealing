@@ -604,6 +604,7 @@ def main():
 
     st.sidebar.markdown('<div class="sidebar-tag">Landasan Teori</div>', unsafe_allow_html=True)
     with st.sidebar.expander("Landasan Teori Algoritma"):
+        st.image("assets/algorithm.png", caption="Flowchart Simulated Annealing", use_container_width=True)
         st.markdown("""
         *Simulated Annealing (SA)* mensimulasikan proses pendinginan logam untuk menemukan solusi optimal global:
 
