@@ -42,13 +42,12 @@ st.markdown(
         width: 100% !important;
         max-width: 100% !important;
         height: auto !important;
-        max-height: 220px !important; /* Mencegah gambar dipaksa meregang terlalu tinggi */
+        max-height: 220px !important;
         object-fit: cover !important;
         border-radius: 12px !important;
         border: 1px solid rgba(255, 255, 255, 0.12) !important;
         box-shadow: 0 4px 16px rgba(0, 0, 0, 0.08) !important;
         
-        /* Mengoptimalkan rendering ketajaman piksel browser */
         image-rendering: -webkit-optimize-contrast !important;
         image-rendering: crisp-edges !important;
     }
