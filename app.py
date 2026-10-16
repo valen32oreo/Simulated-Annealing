@@ -1,3 +1,4 @@
+import base64
 import math
 import random
 import time
@@ -31,31 +32,27 @@ st.markdown(
     }
 
     /* Banner Gambar */
-    div[data-testid="stImage"] {
+    .custom-banner-container {
         width: 100% !important;
-        display: flex !important;
-        justify-content: center !important;
-        margin-bottom: 20px !important;
+        margin-bottom: 20px;
+        border-radius: 12px;
+        overflow: hidden;
+        border: 1px solid rgba(0, 0, 0, 0.08);
+        box-shadow: 0 4px 16px rgba(0, 0, 0, 0.06);
     }
 
-    div[data-testid="stImage"] > img {
+    .custom-banner-img {
         width: 100% !important;
-        max-width: 100% !important;
         height: auto !important;
-        max-height: 220px !important;
-        object-fit: cover !important;
-        border-radius: 12px !important;
-        border: 1px solid rgba(255, 255, 255, 0.12) !important;
-        box-shadow: 0 4px 16px rgba(0, 0, 0, 0.08) !important;
-        
-        image-rendering: -webkit-optimize-contrast !important;
-        image-rendering: crisp-edges !important;
+        aspect-ratio: 4949 / 1406 !important;
+        object-fit: contain !important;
+        display: block !important;
     }
 
     @media (max-width: 768px) {
-        div[data-testid="stImage"] > img {
-            max-height: 140px !important;
-            border-radius: 8px !important;
+        .custom-banner-img {
+            height: 120px !important;
+            border-radius: 8px;
         }
     }
 
@@ -549,7 +546,22 @@ def calculate_delay(state, demands):
 def main():
 
     # HEADER BANNER
-    st.image("assets/Traffic_Banner.png", use_container_width=True)
+    def get_base64_image(image_path):
+        with open(image_path, "rb") as image_file:
+            return base64.b64encode(image_file.read()).decode()
+
+    try:
+        banner_b64 = get_base64_image("assets/Traffic_Banner.png")
+        st.markdown(
+            f"""
+            <div class="custom-banner-container">
+                <img src="data:image/png;base64,{banner_b64}" class="custom-banner-img" alt="Traffic Banner">
+            </div>
+            """,
+            unsafe_allow_html=True,
+        )
+    except Exception:
+        st.image("assets/Traffic_Banner.png", use_container_width=True)
 
     # SIDEBAR CONTROL PANEL
     st.sidebar.markdown(
