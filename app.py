@@ -39,7 +39,7 @@ st.markdown(
     div[data-testid="stImage"] > img {
         width: 100% !important;
         height: auto !important;
-        max-height: 220px !important; /* Mencegah gambar terlalu tinggi di layar ultra-wide */
+        max-height: 220px !important;
         object-fit: cover !important;
         border-radius: 12px !important;
         border: 1px solid rgba(255, 255, 255, 0.12) !important;
@@ -559,7 +559,7 @@ def calculate_delay(state, demands):
 def main():
 
     # HEADER BANNER
-    st.image("assets/Traffic_Banner.webp", use_container_width=True)
+    st.image("assets/Traffic_Banner.png", use_container_width=True)
 
     # SIDEBAR CONTROL PANEL
     st.sidebar.markdown(
