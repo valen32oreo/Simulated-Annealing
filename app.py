@@ -172,7 +172,7 @@ st.markdown(
     }
 
     .sidebar-title {
-        font-size: 15px;
+        font-size: 25px;
         font-weight: 800;
         color: #0f172a;
         margin-bottom: 4px;
