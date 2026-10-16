@@ -50,9 +50,9 @@ st.markdown(
     }
 
     @media (max-width: 768px) {
-        .custom-banner-img {
-            height: 120px !important;
-            border-radius: 8px;
+        .custom-banner-container {
+            border-radius: 8px !important;
+            margin-bottom: 12px !important;
         }
     }
 
