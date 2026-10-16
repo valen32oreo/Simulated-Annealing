@@ -614,6 +614,23 @@ def main():
         - **Pendinginan (α)**: Mengontrol transisi pencarian ($P = e^{-\\Delta E / T}$).
         """)
 
+    st.sidebar.markdown('<div class="sidebar-tag">Analisis Algoritma</div>', unsafe_allow_html=True)
+    with st.sidebar.expander("Kompleksitas Big-O"):
+        st.markdown("""
+        **1. Kompleksitas Waktu (*Time Complexity*): $\mathcal{O}(K \cdot N)$**
+        - **Total Iterasi Pendinginan ($K$)**: 
+          $$K = \\left\\lceil \\frac{\\ln(T_{\\min} / T_0)}{\\ln(\\alpha)} \\right\\rceil \\times \\text{inner\\_loop}$$
+          Dengan $T_0 = 100$, $T_{\\min} = 0.5$, $\\alpha = 0.92$, dan *inner loop* = 8, algoritma mengeksekusi $\\approx 524$ iterasi.
+        - **Evaluasi Fungsi Biaya ($N$)**: $\mathcal{O}(N)$ di mana $N = 4$ lajur persimpangan.
+        - **Total Operasi Eksekusi**: $\\approx 2.096$ operasi (eksekusi sangat instan dan *real-time*).
+
+        ---
+
+        **2. Kompleksitas Ruang (*Space Complexity*): $\mathcal{O}(N)$**
+        - **Penggunaan Memori**: Hanya menyimpan array sinyal 4 lajur (`current_state`, `neighbor`, `best_state`).
+        - **Efisiensi Memori**: Memori berukuran konstan relatif terhadap jumlah iterasi $\mathcal{O}(1)$.
+        """)
+
     # BASELINE COMPUTATION
     fixed_state = [25, 25, 25, 25]
     baseline_delay = calculate_delay(fixed_state, demands)
