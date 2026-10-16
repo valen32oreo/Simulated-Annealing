@@ -33,39 +33,30 @@ st.markdown(
     /* Banner Gambar */
     div[data-testid="stImage"] {
         width: 100% !important;
+        display: flex !important;
+        justify-content: center !important;
         margin-bottom: 20px !important;
     }
 
     div[data-testid="stImage"] > img {
         width: 100% !important;
+        max-width: 100% !important;
         height: auto !important;
-        max-height: 220px !important;
+        max-height: 220px !important; /* Mencegah gambar dipaksa meregang terlalu tinggi */
         object-fit: cover !important;
         border-radius: 12px !important;
         border: 1px solid rgba(255, 255, 255, 0.12) !important;
-        box-shadow: 0 4px 20px rgba(0, 0, 0, 0.15) !important;
-        display: block !important;
-    }
-
-    /* Penyesuaian Layar Tablet (Tablet Portrait & Landscape) */
-    @media (max-width: 1024px) {
-        div[data-testid="stImage"] > img {
-            max-height: 180px !important;
-            border-radius: 10px !important;
-        }
-    }
-
-    /* Penyesuaian Layar Mobile (Smartphone) */
-    @media (max-width: 768px) {
-        div[data-testid="stImage"] {
-            margin-bottom: 12px !important;
-        }
+        box-shadow: 0 4px 16px rgba(0, 0, 0, 0.08) !important;
         
+        /* Mengoptimalkan rendering ketajaman piksel browser */
+        image-rendering: -webkit-optimize-contrast !important;
+        image-rendering: crisp-edges !important;
+    }
+
+    @media (max-width: 768px) {
         div[data-testid="stImage"] > img {
-            max-height: 120px !important;
+            max-height: 140px !important;
             border-radius: 8px !important;
-            object-fit: contain !important;
-            background-color: #72aefd;
         }
     }
 
