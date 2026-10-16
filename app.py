@@ -64,8 +64,8 @@ st.markdown(
         div[data-testid="stImage"] > img {
             max-height: 120px !important;
             border-radius: 8px !important;
-            object-fit: contain !important; /* Memastikan seluruh isi banner tetap terlihat penuh di HP */
-            background-color: #72aefd; /* Background penyelarasan warna banner */
+            object-fit: contain !important;
+            background-color: #72aefd;
         }
     }
 
