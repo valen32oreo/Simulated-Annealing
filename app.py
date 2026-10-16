@@ -30,61 +30,43 @@ st.markdown(
         padding-right: 1.25rem;
     }
 
-    /* Header Banner */
-    .header-card {
-        background: #ffffff;
-        border: 1px solid #e2e8f0;
-        border-radius: 12px;
-        padding: 20px 24px;
-        box-shadow: 0 1px 3px rgba(0, 0, 0, 0.02);
-        display: flex;
-        gap: 16px;
-        align-items: stretch;
-        margin-bottom: 20px;
+    /* Banner Gambar */
+    div[data-testid="stImage"] {
+        width: 100% !important;
+        margin-bottom: 20px !important;
     }
 
-    .accent-bar {
-        width: 4px;
-        background: #2563eb;
-        border-radius: 9999px;
-        flex-shrink: 0;
+    div[data-testid="stImage"] > img {
+        width: 100% !important;
+        height: auto !important;
+        max-height: 220px !important; /* Mencegah gambar terlalu tinggi di layar ultra-wide */
+        object-fit: cover !important;
+        border-radius: 12px !important;
+        border: 1px solid rgba(255, 255, 255, 0.12) !important;
+        box-shadow: 0 4px 20px rgba(0, 0, 0, 0.15) !important;
+        display: block !important;
     }
 
-    .header-content {
-        display: flex;
-        flex-direction: column;
-        gap: 4px;
-        width: 100%;
+    /* Penyesuaian Layar Tablet (Tablet Portrait & Landscape) */
+    @media (max-width: 1024px) {
+        div[data-testid="stImage"] > img {
+            max-height: 180px !important;
+            border-radius: 10px !important;
+        }
     }
 
-    .header-eyebrow {
-        font-size: 11px;
-        font-weight: 700;
-        color: #2563eb;
-        text-transform: uppercase;
-        letter-spacing: 0.06em;
-        margin: 0;
-    }
-
-    .header-title {
-        font-size: 22px !important;
-        font-weight: 800 !important;
-        line-height: 1.3 !important;
-        color: #0f172a !important;
-        margin: 0 !important;
-        letter-spacing: -0.02em !important;
-    }
-
-    .header-title i {
-        color: #2563eb;
-        font-style: normal;
-    }
-
-    .header-subtitle {
-        font-size: 13px;
-        line-height: 1.5;
-        color: #64748b;
-        margin: 2px 0 0 0;
+    /* Penyesuaian Layar Mobile (Smartphone) */
+    @media (max-width: 768px) {
+        div[data-testid="stImage"] {
+            margin-bottom: 12px !important;
+        }
+        
+        div[data-testid="stImage"] > img {
+            max-height: 120px !important;
+            border-radius: 8px !important;
+            object-fit: contain !important; /* Memastikan seluruh isi banner tetap terlihat penuh di HP */
+            background-color: #72aefd; /* Background penyelarasan warna banner */
+        }
     }
 
     /* Metric Cards Grid */
@@ -577,23 +559,7 @@ def calculate_delay(state, demands):
 def main():
 
     # HEADER BANNER
-    st.markdown(
-        """
-        <div class="header-card">
-            <div class="accent-bar"></div>
-            <div class="header-content">
-                <p class="header-eyebrow">Kelompok 1 | Kompleksitas Algoritma</p>
-                <h1 class="header-title">
-                    Pengaturan Lampu Lalu Lintas Adaptif dengan <i>Simulated Annealing</i>
-                </h1>
-                <p class="header-subtitle">
-                    Optimasi alokasi waktu hijau untuk meminimalkan rata-rata waktu tunggu kendaraan di persimpangan 4 lajur.
-                </p>
-            </div>
-        </div>
-        """,
-        unsafe_allow_html=True,
-    )
+    st.image("assets/Traffic_Banner.webp", use_container_width=True)
 
     # SIDEBAR CONTROL PANEL
     st.sidebar.markdown(
