@@ -618,7 +618,7 @@ def main():
     with st.sidebar.expander("Kompleksitas Big-O"):
         st.markdown("""
         **1. Kompleksitas Waktu (*Time Complexity*): $\mathcal{O}(K \cdot N)$**
-        - **Total Iterasi Pendinginan ($K$)**: 
+        - **Total Iterasi Pendinginan ($K$)**: j
           $$K = \\left\\lceil \\frac{\\ln(T_{\\min} / T_0)}{\\ln(\\alpha)} \\right\\rceil \\times \\text{inner\\_loop}$$
           Dengan $T_0 = 100$, $T_{\\min} = 0.5$, $\\alpha = 0.92$, dan *inner loop* = 8, algoritma mengeksekusi $\\approx 524$ iterasi.
         - **Evaluasi Fungsi Biaya ($N$)**: $\mathcal{O}(N)$ di mana $N = 4$ lajur persimpangan.
