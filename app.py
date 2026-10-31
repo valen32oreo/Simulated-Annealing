@@ -632,7 +632,7 @@ def main():
         """)
 
     st.sidebar.markdown('<div class="sidebar-tag">Arsitektur Hardware</div>', unsafe_allow_html=True)
-    with st.sidebar.expander("📷 Arsitektur Sensor Dual-Angle 360°"):
+    with st.sidebar.expander("Arsitektur Sensor Dual-Angle 360°"):
         st.markdown("""
         **Sistem Akuisisi Data 3 Sensor (Zero Blind Spot):**
         
