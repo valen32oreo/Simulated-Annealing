@@ -631,6 +631,25 @@ def main():
         - **Efisiensi Memori**: Memori berukuran konstan relatif terhadap jumlah iterasi $\mathcal{O}(1)$.
         """)
 
+    st.sidebar.markdown('<div class="sidebar-tag">Arsitektur Hardware</div>', unsafe_allow_html=True)
+    with st.sidebar.expander("📷 Arsitektur Sensor Dual-Angle 360°"):
+        st.markdown("""
+        **Sistem Akuisisi Data 3 Sensor (Zero Blind Spot):**
+        
+        - **Sensor 1 (POV Depan)**: 
+          Dipasang di samping lampu lalu lintas untuk menghitung kepadatan antrean di garis henti (*stop line*).
+        
+        - **Sensor 2 & 3 (POV Samping 180° Kontinu)**: 
+          Dipasang di sisi koridor jalan dengan sudut pandang $180^\\circ$ per sensor. Dirancang **tanpa *gap* (celah kosong)** untuk memindai seluruh arus kendaraan yang mendekati persimpangan secara presisi.
+        
+        ---
+        
+        **Formula Input Demand ($D_i$):**
+        $$D_i = N_{\\text{Sensor 1}} + \\left( N_{\\text{Sensor 2}} + N_{\\text{Sensor 3}} \\right)$$
+        
+        Data $D_i$ dari ketiga sensor dievaluasi secara *real-time* oleh fungsi biaya `calculate_delay()` pada algoritma Simulated Annealing.
+        """)
+
     # BASELINE COMPUTATION
     fixed_state = [25, 25, 25, 25]
     baseline_delay = calculate_delay(fixed_state, demands)
